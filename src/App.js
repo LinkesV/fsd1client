@@ -1,25 +1,29 @@
-import logo from './logo.svg';
 import './App.css';
+import Movies from './Pages/Movies';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { createContext } from 'react';
+import { useState } from 'react';
 
+
+const data = createContext()
 function App() {
+
+  const[value,setValue] = useState(0)
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <BrowserRouter>
+      <data.Provider value={[value,setValue]}>
+        <Routes>
+         
+            <Route exact path='/movies' element={<Movies/>}/>
+          
+        </Routes>
+        </data.Provider>
+      </BrowserRouter>
     </div>
   );
 }
 
+export {data}; 
 export default App;
